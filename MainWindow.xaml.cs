@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Intrinsics.X86;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -57,14 +56,14 @@ namespace WpfApp1
             {
                 hod = "x ";
                 wi = hod_player(sender, e);
-                if(wi == false)
+                if (wi == false)
                     wi = seee(k);
                 if (wi == true)
                     itog("player", k);
                 if (wi != true)
                 {
                     wi = hod_bot(k, hod);
-                    if(wi == false)
+                    if (wi == false)
                         wi = seee(k);
                     if (wi == true)
                         itog("bot", k);
@@ -87,7 +86,7 @@ namespace WpfApp1
             else if (a == 2)
             {
                 no.IsChecked = true;
-                hod_bot(k, "o ");
+                hod_bot(k, "x ");
             }
 
 
@@ -109,9 +108,12 @@ namespace WpfApp1
         }
         private bool hod_player(object sender, RoutedEventArgs e)
         {
-            (sender as Button).Content = "x ";
+            if (a == 1)
+                (sender as Button).Content = "x ";
+            else if (a == 2)
+                (sender as Button).Content = "o ";
             (sender as Button).IsEnabled = false;
-            return win("x ");
+            return win((string)(sender as Button).Content);
         }
         private bool win(string hod)
         {
@@ -138,7 +140,7 @@ namespace WpfApp1
         {
             if (name == "Ничья")
                 MessageBox.Show("Ничья!");
-            else
+            else if (name != "Ничья")
                 MessageBox.Show($"{name} победил!");
             foreach (Button b in x)
             {
